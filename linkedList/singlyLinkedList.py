@@ -21,14 +21,14 @@ class SingleLinkedList:
     def push_front(self, val):
         new_node = self.Node(val)
 
-        if self.head is None:
+        if self.head.data is None:
             self.head = new_node
         else:
             new_node.next_node = self.head
             self.head = new_node
 
     def pop_back(self):
-        if self.head is None:
+        if self.head.data is None:
             print('There are no nodes to pop')
         elif self.head.next_node is None:
             val = self.head.data
@@ -43,7 +43,7 @@ class SingleLinkedList:
             return val
 
     def pop_front(self):
-        if self.head is None:
+        if self.head.data is None:
             print('There are no nodes to pop')
         elif self.head.next_node is None:
             val = self.head.data
@@ -55,7 +55,7 @@ class SingleLinkedList:
             return val
 
     def search(self, val):
-        if self.head is None:
+        if self.head.data is None:
             return 'Linked list is empty'
         elif self.head.next_node is None:
             if self.head.data == val:
@@ -221,15 +221,6 @@ class SingleLinkedList:
 
 a = SingleLinkedList()
 b = SingleLinkedList()
-a.push_back(1)
-a.push_back(2)
-a.push_back(6)
-a.push_back(9)
-b.push_back(4)
-b.push_back(6)
-b.push_back(8)
-b.push_back(10)
-c = a.mergeTwoSortedLists(b)
-print(c.head.data, c.head.next_node.data, c.head.next_node.next_node.data,
-      c.head.next_node.next_node.next_node.data, c.head.next_node.next_node.next_node.next_node.data,
-      c.head.next_node.next_node.next_node.next_node.next_node.data)
+a.push_front(2)
+#c = a.mergeTwoSortedLists(b)
+print(a.head.data)

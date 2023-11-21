@@ -1,7 +1,3 @@
-#push_back(val), push_front(val), pop_back(), pop_front(), search(val)
-#insert(position, val), delete(pos), insert(pos, singly_linked_list)
-#reverse(head), getMiddleNode(head), hasCycle(head), getStartPoint(head), mergeTwoSortedLists
-
 class SingleLinkedList:
     class Node:
         def __init__(self, data=None):
@@ -139,35 +135,101 @@ class SingleLinkedList:
             else:
                 print('Position error')
 
-    def reverse(self, head):
-        pass
+    def reverse(self):
+        prev = self.Node()
+        _next = self.Node()
+        current = self.head
 
-    def getMiddleNode(self, head):
-        pass
+        while current is not None:
+            _next = current.next_node
+            current.next_node = prev
 
-    def hasCycle(self, head):
-        pass
+            prev = current
+            current = _next
+        self.head = prev
 
-    def getStartPoint(self, head):
-        pass
+    def getMiddleNode(self):
+        fast = self.head
+        slow = self.head
+        #Empty linked list
+        if self.head is None:
+            return 'No element in the list'
+        #Linked list with one element, return that element
+        elif self.head.next_node is None:
+            return self.head.data
+        else:
+            while fast is not None and fast.next_node is not None:
+                fast = fast.next_node.next_node
+                slow = slow.next_node
+            return slow.data
 
-    def mergeTwoSortedLists(self, head):
-        pass
+    def hasCycle(self):
+        fast = self.head
+        slow = self.head
+
+        while fast is not None and fast.next_node is not None:
+            slow = slow.next_node
+            fast = fast.next_node.next_node
+            if fast is slow:
+                return True
+        return False
+
+
+    def getStartPoint(self):
+        if not self.hasCycle():
+            return 'This list does not have a cycle'
+        seen = set()
+        current = self.head
+        while current not in seen:
+            seen.add(current)
+            current = current.next_node
+        return current
+
+    def mergeTwoSortedLists(self, other):
+        if not isinstance(other, SingleLinkedList):
+            return "Can't merge!"
+        new_sll = SingleLinkedList()
+        current = new_sll.head
+        i = self.head
+        j = other.head
+        while i is not None and j is not None:
+            if i.data <= j.data:
+                current.next_node = i
+                i = i.next_node
+            else:
+                current.next_node = j
+                j = j.next_node
+            current = current.next_node
+
+        while i is not None:
+            current.next_node = i
+            i = i.next_node
+            current = current.next_node
+
+        while j is not None:
+            current.next_node = j
+            j = j.next_node
+            current = current.next_node
+        new_sll.head = new_sll.head.next_node
+        return new_sll
 
 
 
 
-sll = SingleLinkedList()
+
+
+
+a = SingleLinkedList()
 b = SingleLinkedList()
-b.push_back(111)
-b.push_front(2232)
-sll.push_back(5)
-print(sll.head.data)
-sll.push_front(10)
-# sll.pop_back()
-# sll.pop_front()
-print(sll.search(25))
-sll.insert(1,122)
-sll.delete(1)
-sll.insert_ssl(b, 1)
-print(sll.head.data, sll.head.next_node.data, sll.head.next_node.next_node.data, sll.head.next_node.next_node.next_node.data)
+a.push_back(1)
+a.push_back(2)
+a.push_back(6)
+a.push_back(9)
+b.push_back(4)
+b.push_back(6)
+b.push_back(8)
+b.push_back(10)
+c = a.mergeTwoSortedLists(b)
+print(c.head.data, c.head.next_node.data, c.head.next_node.next_node.data,
+      c.head.next_node.next_node.next_node.data, c.head.next_node.next_node.next_node.next_node.data,
+      c.head.next_node.next_node.next_node.next_node.next_node.data)

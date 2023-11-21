@@ -1,9 +1,10 @@
 #push_back(val), pop_back(), insert(index, val), delete(index), search(val), resize(val, count), clear()
-class dynamicArray:
+class DynamicArray:
     def __init__(self):
         self.size = 0
         self.capacity = 1
         self.arr = [None] * self.capacity
+
 
 
     def push_back(self, val):
@@ -78,7 +79,7 @@ class dynamicArray:
         self.arr = [None] * self.capacity
 
 
-arr = dynamicArray()
+arr = DynamicArray()
 arr.push_back(1)
 arr.push_back(2)
 arr.push_back(3)

@@ -252,6 +252,8 @@ class Soll:
             return slow.data
 
     def hasCycle(self):
+        if self.head is None:
+            return False
         fast = self.head
         slow = self.head
 
@@ -263,14 +265,21 @@ class Soll:
         return False
 
     def getStartPoint(self):
-        if not self.hasCycle():
-            return 'This list does not have a cycle'
-        seen = set()
-        current = self.head
-        while current not in seen:
-            seen.add(current)
-            current = current.next_node
-        return current
+        if self.head is None:
+            return 'There is no cycle'
+        fast = self.head
+        slow = self.head
+
+        while fast is not None and fast.next_node is not None:
+            slow = slow.next_node
+            fast = fast.next_node.next_node
+            if fast is slow:
+                slow = self.head
+                while slow is not fast:
+                    slow = slow.next_node
+                    fast = fast.next_node
+                return slow
+
 
     def mergeTwoSortedLists(self, other):
         if not isinstance(other, DoublyLinkedList):

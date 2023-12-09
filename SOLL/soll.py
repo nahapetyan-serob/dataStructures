@@ -107,17 +107,38 @@ class Soll:
     def search(self, val):
         if self.head is None:
             return 'Linked list is empty'
-        elif self.head.next_node is None:
-            if self.head.val == val:
-                return 0
+
         current = self.head
-        position = 1
-        while current.next_node is not None:
-            if current.next_node.val == val:
+        position = 0
+        while current:
+            if current.val == val:
+                if current.prev_node:
+                    self.__swap_nodes(current.prev_node, current)
                 return position
             current = current.next_node
             position += 1
         return 'Not found'
+
+    def __swap_nodes(self, node1, node2):
+
+        tmp = node2
+        tmp.prev_node = node1.prev_node
+        tmp.next_node = node1.next_node
+
+        if node1.prev_node:
+            node1.prev_node.next_node = tmp
+
+        if node1.next_node:
+            node1.next_node.prev_node = tmp
+
+        if node2.prev_node:
+            node2.prev_node.next_node = node1
+            node1.prev_node = node2.prev_node
+
+        if node2.next_node:
+            node2.next_node.prev_node = node1
+            node1.next_node = node2.next_node
+
 
     def insert(self, position, val):
         new_node = self.Node(val)

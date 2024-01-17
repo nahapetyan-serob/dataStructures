@@ -69,7 +69,7 @@ class BST:
         if not node.right:
             return node
         else:
-            return self.__get_min(node.right)
+            return self.__get_max(node.right)
 
     def get_max(self):
         return self.__get_max(self.root)
@@ -92,6 +92,7 @@ class BST:
         else:
             node.right = self.__insert(node.right, val)
         return node
+
     def insert(self, val):
         self.root = self.__insert(self.root, val)
 

@@ -126,7 +126,7 @@ class BST:
         return predecessor
 
     def delete(self, val):
-        self.__help_delete(self.root, val)
+        self.root = self.__help_delete(self.root, val)
 
     def __help_delete(self, node, val):
         if not node:
@@ -147,7 +147,7 @@ class BST:
                 node.val = successor.val
                 node.right = self.__help_delete(node.right, successor.val)
 
-
+        return node
 
 
 
@@ -169,4 +169,7 @@ bst.insert(21)
 bst.insert(28)
 bst.insert(35)
 bst.insert(50)
+bst.inorder_traverse()
+bst.delete(40)
+print('New')
 bst.inorder_traverse()

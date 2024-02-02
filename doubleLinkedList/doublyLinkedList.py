@@ -4,6 +4,7 @@ class DoublyLinkedList:
             self.data = data
             self.next_node = None
             self.prev_node = None
+
     def __init__(self):
         self.head = self.Node()
         self.tail = self.Node()
@@ -30,7 +31,6 @@ class DoublyLinkedList:
             self.head.prev_node = new_node
             self.head = new_node
 
-
     def pop_back(self):
         if self.head.data is None:
             return 'Empty list, nothing to pop'
@@ -39,7 +39,6 @@ class DoublyLinkedList:
             self.tail = self.tail.prev_node
             self.tail.next_node = None
             return val
-
 
     def pop_front(self):
 
@@ -50,6 +49,7 @@ class DoublyLinkedList:
             self.head = self.head.next_node
             self.head.prev_node = None
             return val
+
     def search(self, val):
         if self.head is None:
             return 'Linked list is empty'
@@ -164,10 +164,10 @@ class DoublyLinkedList:
     def getMiddleNode(self):
         fast = self.head
         slow = self.head
-        #Empty linked list
+        # Empty linked list
         if self.head is None:
             return 'No element in the list'
-        #Linked list with one element, return that element
+        # Linked list with one element, return that element
         elif self.head.next_node is None:
             return self.head.data
         else:
@@ -186,7 +186,6 @@ class DoublyLinkedList:
             if fast is slow:
                 return True
         return False
-
 
     def getStartPoint(self):
         if not self.hasCycle():

@@ -5,8 +5,6 @@ class DynamicArray:
         self.capacity = 1
         self.arr = [None] * self.capacity
 
-
-
     def push_back(self, val):
         if self.size == self.capacity:
             self.capacity *= 2

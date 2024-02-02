@@ -213,6 +213,19 @@ class SingleLinkedList:
         new_sll.head = new_sll.head.next_node
         return new_sll
 
+    def __reverse_recursive(self, node):
+        if not node or not node.next_node:
+            return node
+        tmp = self.reverse_recursive(node.next_node)
+        node.next_node.next_node = node
+        node.next_node = None
+        self.head = tmp
+
+    def reverse_recursive(self):
+        self.__reverse_recursive(self.head)
+
+
+
 
 
 

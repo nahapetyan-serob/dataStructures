@@ -3,6 +3,7 @@ class SingleLinkedList:
         def __init__(self, data=None):
             self.data = data
             self.next_node = None
+
     def __init__(self):
         self.head = self.Node()
 
@@ -16,7 +17,6 @@ class SingleLinkedList:
             while current.next_node is not None:
                 current = current.next_node
             current.next_node = new_node
-
 
     def push_front(self, val):
         new_node = self.Node(val)
@@ -174,7 +174,6 @@ class SingleLinkedList:
                 return True
         return False
 
-
     def getStartPoint(self):
         if not self.hasCycle():
             return 'This list does not have a cycle'
@@ -216,13 +215,13 @@ class SingleLinkedList:
     def __reverse_recursive(self, node):
         if not node or not node.next_node:
             return node
-        tmp = self.reverse_recursive(node.next_node)
+        tmp = self.__reverse_recursive(node.next_node)
         node.next_node.next_node = node
         node.next_node = None
-        self.head = tmp
+        return tmp
 
     def reverse_recursive(self):
-        self.__reverse_recursive(self.head)
+        self.head = self.__reverse_recursive(self.head)
 
 
 

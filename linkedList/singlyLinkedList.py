@@ -7,6 +7,14 @@ class SingleLinkedList:
     def __init__(self):
         self.head = self.Node()
 
+    def __repr__(self):
+        linked_list = []
+        curr = self.head
+        while curr:
+            linked_list.append(str(curr.data))
+            curr = curr.next_node
+        return ' -> '.join(linked_list)
+
     def push_back(self, val):
         new_node = self.Node(val)
 
@@ -224,6 +232,18 @@ class SingleLinkedList:
         self.head = self.__reverse_recursive(self.head)
 
 
+def merge_two_sorted_linked_lists(head1, head2):
+    if not head1:
+        return head2
+    if not head2:
+        return head1
+    if head1.data < head2.data:
+        head1.next_node = merge_two_sorted_linked_lists(head1.next_node, head2)
+        return head1
+    else:
+        head2.next_node = merge_two_sorted_linked_lists(head1, head2.next_node)
+        return head2
+
 
 
 
@@ -233,6 +253,19 @@ class SingleLinkedList:
 
 a = SingleLinkedList()
 b = SingleLinkedList()
-a.push_front(2)
+a.push_back(2)
+a.push_back(4)
+a.push_back(6)
+a.push_back(8)
+a.push_back(10)
+a.push_back(12)
+print(a)
+b.push_back(3)
+b.push_back(5)
+b.push_back(7)
+b.push_back(9)
+print(b)
+c = SingleLinkedList()
+c.head = merge_two_sorted_linked_lists(a.head, b.head)
+print(c)
 #c = a.mergeTwoSortedLists(b)
-print(a.head.data)

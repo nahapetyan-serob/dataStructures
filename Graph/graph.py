@@ -183,3 +183,23 @@ class DirectedGraph:
         else:
             return ts
 
+    def shortest_path(self, src: int, dst: int) -> List[int]:
+        visited = [False] * self.size
+        visited[src] = True
+        queue = [src]
+        paths = [[src]]
+        while queue:
+            u = queue.pop(0)
+            tmp = paths.pop(0)
+            if u == dst:
+                return tmp
+            for v in self.adjacency_list[u]:
+                if not visited[v]:
+                    visited[v] = True
+                    queue.append(v)
+                    paths.append(tmp + [v])
+        return []
+
+
+
+

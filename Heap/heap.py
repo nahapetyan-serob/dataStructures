@@ -8,15 +8,21 @@ class Heap:
         self.top = self.arr[0] if self.heap_size > 0 else None
 
     def get_right(self, i: int) -> int:
-        return 2 * i + 2
+        if 2 * i + 2 < self.heap_size:
+            return 2 * i + 2
+        raise IndexError
 
     def get_left(self, i: int) -> int:
-        return 2 * i + 1
+        if 2 * i + 1 < self.heap_size:
+            return 2 * i + 1
+        raise IndexError
 
     def swap(self, i, j) -> None:
         self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
 
     def max_heapify(self, index: int) -> None:
+        if index == 0:
+            return
         left = self.get_left(index)
         right = self.get_right(index)
         largest = index
@@ -42,7 +48,10 @@ class Heap:
     def insert(self, value: int) -> None:
         self.arr.append(value)
         self.heap_size += 1
-        self.max_heapify(self.heap_size - 1)
+        i = self.heap_size - 1
+        while i > 0 and self.arr[(i - 1) // 2] < self.arr[i]:
+            self.swap((i - 1) // 2, i)
+            i = (i - 1) // 2
 
     def extract_max(self) -> Union[int, str]:
         if self.heap_size < 1:
@@ -64,3 +73,8 @@ class Heap:
             self.swap((i - 1) // 2, i)
             i = (i - 1) // 2
 
+
+heap = Heap()
+heap.insert(5)
+a = heap.extract_max()
+print(a)

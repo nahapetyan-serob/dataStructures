@@ -1,3 +1,5 @@
+from typing import Optional
+
 class AVL:
     class Node:
         def __init__(self, val=0):
@@ -124,6 +126,7 @@ class AVL:
             return self.__right_rotate(node)
 
         return node
+
     def insert(self, val):
         self.root = self.__insert(self.root, val)
 
@@ -198,8 +201,30 @@ class AVL:
         return node
 
 
+class BSTIterator:
 
+    def __init__(self, root: Optional[AVL]):
+        self.stack = []
+        self.__push_left(root)
 
+    def __push_left(self, node):
+        while node:
+            self.stack.append(node)
+            node = node.left
+
+    def __next__(self) -> int:
+        if not self.hasNext():
+            raise StopIteration
+        node = self.stack.pop()
+        if node.right:
+            self.__push_left(node.right)
+        return node.val
+
+    def __iter__(self):
+        return self
+
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0
 
 
 avl = AVL()
@@ -218,4 +243,7 @@ avl.insert(21)
 avl.insert(28)
 avl.insert(35)
 avl.insert(50)
-avl.inorder_traverse()
+obj = BSTIterator(avl.root)
+for i in obj:
+    print(i)
+
